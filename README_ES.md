@@ -240,7 +240,7 @@ La copia de seguridad completa de la configuración está disponible en el direc
 ### Instrucciones de Restauración
 
 1. En el panel de administración de Sophos, ir a **Backup & firmware → Restaurar**.
-2. Hacer clic en **Examinar** y seleccionar backup/MiguelSophosFW_Backup_V01001QG6KMPB4F_HV01_SFOS-22.0.0-GA-Build411_21May2026_13.13.42
+2. Hacer clic en **Examinar** y seleccionar [(/backup/MiguelSophosFW_Backup_V01001QG6KMPB4F_HV01_SFOS-22.0.0-GA-Build411_21May2026_13.13.42)]
 3. El backup está **cifrado con AES**. Para obtener la contraseña de descifrado, contactar a través de GitHub o correo electrónico.
 4. Hacer clic en **Cargar y restaurar**. El sistema aplicará la configuración y se reiniciará.
 
