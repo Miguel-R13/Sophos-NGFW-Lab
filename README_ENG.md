@@ -1,5 +1,4 @@
 # 🔐 Secure Network Architecture & Sophos NGFW Deployment
-### Terra Renewables — Enterprise Cybersecurity Lab
 
 > **Lab environment** built on Hyper-V that emulates a production enterprise network. Designed to demonstrate applied knowledge of network segmentation, perimeter hardening, and defence-in-depth principles.
 
