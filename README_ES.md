@@ -211,6 +211,18 @@ Los conjuntos de reglas o configuraciones ACL individuales pueden exportarse/imp
 ### ✅ Monitoreo de Flujo (Log Viewer: Allow)
 ![Tráfico Permitido](screenshots/log-viewer-allowed.png)
 
+### 🛡️ Firewall Rule Hierarchy
+![Firewall Ruleset Part 1](screenshots/ngfw-vpn-admin-servers.png)
+![Firewall Ruleset Part 2](screenshots/ngfw-lan-hyperv.png)
+
+*The firewall utilizes a top-down processing logic. The rulebase is structured to prioritize trust and management access:*
+
+* **VPN Rules:** Positioned at the top to ensure encrypted tunnels are processed with priority.
+* **Administrative & Server Rules:** Critical infrastructure traffic is placed above user segments to ensure low-latency and secure management access.
+* **LAN & Hypervisor Rules:** Standardized corporate traffic follows, segmented by VLAN.
+* **Guest Zones:** Positioned lower in the hierarchy due to their 'untrusted' status.
+* **Default Deny (Drop All):** The final rule, ensuring that any traffic not explicitly permitted is silently dropped, fulfilling the *Default Deny* architectural requirement.
+
 ## 🎓 Contexto
 
 Este proyecto se ha desarrollado en el marco de un **Máster en Ciberseguridad**, con el objetivo de aplicar principios teóricos de seguridad a una infraestructura práctica de laboratorio. La configuración está diseñada para ser auditable y reproducible, sirviendo tanto como artefacto de aprendizaje como demostración de habilidades aplicadas de seguridad de red para un portfolio profesional.
