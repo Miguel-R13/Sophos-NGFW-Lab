@@ -216,6 +216,10 @@ Individual rule sets or ACL configurations can be exported/imported via the **Im
 ![Firewall Ruleset Part 1](screenshots/ngfw-vpn-admin-servers.png)
 ![Firewall Ruleset Part 2](screenshots/ngfw-lan-hyperv.png)
 
+### 🔒 Management Plane Hardening
+![Administration Services](screenshots/system-administration-hardening.png)
+*Implementation of the Principle of Least Privilege regarding the management plane. Administrative access (HTTPS/SSH) has been restricted exclusively to the `ADMINISTRACION` zone (PortD), eliminating the attack surface from untrusted segments such as user, server, or guest networks.*
+
 *The firewall utilizes a top-down processing logic. The rulebase is structured to prioritize trust and management access:*
 
 * **VPN Rules:** Positioned at the top to ensure encrypted tunnels are processed with priority.
