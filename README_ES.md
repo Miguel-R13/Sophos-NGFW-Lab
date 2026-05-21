@@ -1,5 +1,5 @@
 # 🔐 Arquitectura de Red Segura y Despliegue de NGFW Sophos
-### Terra Renewables — Laboratorio de Ciberseguridad Empresarial
+### Laboratorio de Ciberseguridad Empresarial
 
 > **Entorno de laboratorio** construido sobre Hyper-V que emula una infraestructura de red corporativa real. Diseñado para demostrar la aplicación práctica de segmentación de red, bastionado perimetral y defensa en profundidad.
 
