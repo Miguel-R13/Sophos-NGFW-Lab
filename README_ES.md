@@ -206,13 +206,23 @@ Los conjuntos de reglas o configuraciones ACL individuales pueden exportarse/imp
 
 ### 🚫 Monitoreo de Seguridad (Log Viewer: Deny)
 ![Tráfico Bloqueado](screenshots/log-viewer-denied.png)
+*Evidencia del cumplimiento de la política **Default Deny**.*
 
 ### ✅ Monitoreo de Flujo (Log Viewer: Allow)
 ![Tráfico Permitido](screenshots/log-viewer-allowed.png)
+*Validación de reglas de firewall en producción.*
 
-### 🛡️ Firewall Rule Hierarchy
-![Firewall Ruleset Part 1](screenshots/ngfw-vpn-admin-servers.png)
-![Firewall Ruleset Part 2](screenshots/ngfw-lan-hyperv.png)
+### 🛡️ Jerarquía de Reglas del Firewall
+![Reglas de Firewall Parte 1](screenshots/ngfw-vpn-admin-servers.png)
+![Reglas de Firewall Parte 2](screenshots/ngfw-lan-hyperv.png)
+
+*El firewall utiliza una lógica de procesamiento de arriba hacia abajo (top-down). La lista de reglas está estructurada para priorizar la confianza y el acceso de gestión:*
+
+* **Reglas VPN:** Posicionadas al inicio para garantizar que los túneles cifrados se procesen con prioridad.
+* **Reglas de Administración y Servidores:** El tráfico de infraestructura crítica se sitúa por encima de los segmentos de usuario para asegurar baja latencia y un acceso de gestión seguro.
+* **Reglas LAN e Hipervisores:** El tráfico corporativo estandarizado sigue a continuación, segmentado por VLAN.
+* **Zonas de Invitados (WiFi):** Posicionadas al final de la jerarquía debido a su estatus de "no confiable".
+* **Denegación por Defecto (Drop All):** La regla final, que garantiza que cualquier tráfico que no esté explícitamente permitido sea descartado silenciosamente, cumpliendo con el requisito arquitectónico de *Default Deny*.
 
 ### 🔒 Bastionado del Plano de Gestión
 ![Administración y Servicios](screenshots/system-administration-hardening.png)
