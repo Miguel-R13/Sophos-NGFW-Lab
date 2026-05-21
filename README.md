@@ -212,6 +212,18 @@ Individual rule sets or ACL configurations can be exported/imported via the **Im
 ![Allowed Traffic](screenshots/log-viewer-allowed.png)
 *Validation of production firewall rules. Demonstrates traffic permitted from `LAN` (PortA) and `ADMIN` (PortD) zones toward the WAN (PortB) via defined custom policies.*
 
+### 🛡️ Firewall Rule Hierarchy
+![Firewall Ruleset Part 1](screenshots/ngfw-vpn-admin-servers.png)
+![Firewall Ruleset Part 2](screenshots/ngfw-lan-hyperv.png)
+
+*The firewall utilizes a top-down processing logic. The rulebase is structured to prioritize trust and management access:*
+
+* **VPN Rules:** Positioned at the top to ensure encrypted tunnels are processed with priority.
+* **Administrative & Server Rules:** Critical infrastructure traffic is placed above user segments to ensure low-latency and secure management access.
+* **LAN & Hypervisor Rules:** Standardized corporate traffic follows, segmented by VLAN.
+* **Guest Zones:** Positioned lower in the hierarchy due to their 'untrusted' status.
+* **Default Deny (Drop All):** The final rule, ensuring that any traffic not explicitly permitted is silently dropped, fulfilling the *Default Deny* architectural requirement.
+
 ## 🎓 Context
 
 This project was developed as part of a **Master's degree in Cybersecurity**, with the objective of applying theoretical security principles to a practical, lab-based infrastructure. The configuration is designed to be auditable and reproducible, serving both as a learning artefact and a portfolio demonstration of applied network security skills.
