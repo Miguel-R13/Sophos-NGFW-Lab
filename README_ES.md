@@ -205,6 +205,12 @@ Los conjuntos de reglas o configuraciones ACL individuales pueden exportarse/imp
 ![Estado General del Sistema](screenshots/ngfw-sophos-panelcontrol.png)
 *Vista unificada del estado del NGFW, tráfico por interfaz y resumen de políticas activas. Se confirma la operatividad del entorno y el flujo de tráfico entre las zonas segmentadas.*
 
+### 🚫 Monitoreo de Seguridad (Log Viewer: Deny)
+![Tráfico Bloqueado](screenshots/log-viewer-denied.png)
+
+### ✅ Monitoreo de Flujo (Log Viewer: Allow)
+![Tráfico Permitido](screenshots/log-viewer-allowed.png)
+
 ## 🎓 Contexto
 
 Este proyecto se ha desarrollado en el marco de un **Máster en Ciberseguridad**, con el objetivo de aplicar principios teóricos de seguridad a una infraestructura práctica de laboratorio. La configuración está diseñada para ser auditable y reproducible, sirviendo tanto como artefacto de aprendizaje como demostración de habilidades aplicadas de seguridad de red para un portfolio profesional.
