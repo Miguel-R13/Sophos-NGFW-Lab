@@ -169,34 +169,17 @@ Esta sección documenta las funcionalidades diseñadas en la arquitectura pero n
 
 ---
 
-## 🚀 Despliegue y Replicabilidad
+🔬 Validación y Simulación de Amenazas
+Esta sección documenta las pruebas realizadas para verificar que las políticas de seguridad funcionan correctamente en la práctica, no solo en la configuración.
+Prueba 1 — Simulación de Movimiento Lateral: LAN → ADMINISTRACIÓN
+Escenario simulado: Un atacante compromete un endpoint de usuario en la zona LAN (WIN10, 192.168.10.100, interfaz BOCA1_10) e intenta acceder al panel de administración del firewall (192.168.40.1) para escalar privilegios o modificar reglas. Este es uno de los vectores de ataque más comunes en redes corporativas tras una intrusión inicial.
+Resultado esperado: Bloqueo total. La política de microsegmentación LAN → ADMINISTRACIÓN debe impedir cualquier acceso desde segmentos de usuario.
+Resultado obtenido: ✅ Acceso bloqueado.
 
-La copia de seguridad completa de la configuración está disponible en el directorio `/backup` de este repositorio.
+[(screenshots/lateral-movement.png)]
 
-### Instrucciones de Restauración
-
-1. En el panel de administración de Sophos, ir a **Backup & firmware → Restaurar**.
-2. Hacer clic en **Examinar** y seleccionar `TerraRenewables_Sophos_Core.backup`.
-3. El backup está **cifrado con AES**. Para obtener la contraseña de descifrado, contactar a través de GitHub o correo electrónico.
-4. Hacer clic en **Cargar y restaurar**. El sistema aplicará la configuración y se reiniciará.
-
-### Importación Selectiva
-Los conjuntos de reglas o configuraciones ACL individuales pueden exportarse/importarse mediante la pestaña **Importar/Exportar** del mismo menú — útil para migrar políticas específicas a otra instancia de Sophos.
-
----
-
-## 📚 Conceptos Clave Demostrados
-
-- **Segmentación de red y microsegmentación** mediante zonas de seguridad
-- **Arquitectura de firewall con Denegación por Defecto** (Default Deny)
-- **Prevención de movimiento lateral** mediante ACLs inter-zona
-- **Seguridad DNS** (resolución interna forzada, anti-tunnelling)
-- **Inspección SSL/TLS** y análisis de tráfico cifrado
-- **Respuesta automatizada a incidentes** mediante telemetría Security Heartbeat
-- **Bastionado del plano de gestión** y principio de mínimo privilegio
-- **Reducción de superficie de ataque** mediante filtrado de egreso y bloqueo de tipos de archivo
-
----
+La imagen muestra en paralelo ambas máquinas: a la izquierda, el endpoint WIN10 (zona LAN) recibe ERR_CONNECTION_TIMED_OUT al intentar acceder a 192.168.40.1. A la derecha, la VM de Administración accede correctamente al panel de Sophos en la misma dirección. Misma IP de destino, dos zonas distintas, dos resultados distintos — validación directa del principio de mínimo privilegio y la microsegmentación.
+Conclusión: La arquitectura de zonas impide que un atacante con acceso a la red de usuarios pueda alcanzar el plano de gestión del firewall, eliminando uno de los vectores de escalada de privilegios más críticos en una red corporativa.
 
 ## 📊 Evidencias de Operación
 
@@ -235,6 +218,35 @@ Los conjuntos de reglas o configuraciones ACL individuales pueden exportarse/imp
 * **LAN & Hypervisor Rules:** Standardized corporate traffic follows, segmented by VLAN.
 * **Guest Zones:** Positioned lower in the hierarchy due to their 'untrusted' status.
 * **Default Deny (Drop All):** The final rule, ensuring that any traffic not explicitly permitted is silently dropped, fulfilling the *Default Deny* architectural requirement.
+
+## 🚀 Despliegue y Replicabilidad
+
+La copia de seguridad completa de la configuración está disponible en el directorio `/backup` de este repositorio.
+
+### Instrucciones de Restauración
+
+1. En el panel de administración de Sophos, ir a **Backup & firmware → Restaurar**.
+2. Hacer clic en **Examinar** y seleccionar `TerraRenewables_Sophos_Core.backup`.
+3. El backup está **cifrado con AES**. Para obtener la contraseña de descifrado, contactar a través de GitHub o correo electrónico.
+4. Hacer clic en **Cargar y restaurar**. El sistema aplicará la configuración y se reiniciará.
+
+### Importación Selectiva
+Los conjuntos de reglas o configuraciones ACL individuales pueden exportarse/importarse mediante la pestaña **Importar/Exportar** del mismo menú — útil para migrar políticas específicas a otra instancia de Sophos.
+
+---
+
+## 📚 Conceptos Clave Demostrados
+
+- **Segmentación de red y microsegmentación** mediante zonas de seguridad
+- **Arquitectura de firewall con Denegación por Defecto** (Default Deny)
+- **Prevención de movimiento lateral** mediante ACLs inter-zona
+- **Seguridad DNS** (resolución interna forzada, anti-tunnelling)
+- **Inspección SSL/TLS** y análisis de tráfico cifrado
+- **Respuesta automatizada a incidentes** mediante telemetría Security Heartbeat
+- **Bastionado del plano de gestión** y principio de mínimo privilegio
+- **Reducción de superficie de ataque** mediante filtrado de egreso y bloqueo de tipos de archivo
+
+---
 
 ## 🎓 Contexto
 
