@@ -204,6 +204,14 @@ Individual rule sets or ACL configurations can be exported/imported via the **Im
 ![System Dashboard](screenshots/ngfw-sophos-panelcontrol.png)
 *Unified view of the NGFW status, interface traffic, and active policies. This confirms the lab environment's operational status and the real-time traffic flow across segmented zones.*
 
+### 🚫 Security Monitoring (Log Viewer: Deny)
+![Blocked Traffic](screenshots/log-viewer-denied.png)
+*Evidence of the **Default Deny** policy enforcement. The firewall proactively drops unauthorized packets and invalid traffic attempts.*
+
+### ✅ Traffic Flow Validation (Log Viewer: Allow)
+![Allowed Traffic](screenshots/log-viewer-allowed.png)
+*Validation of production firewall rules. Demonstrates traffic permitted from `LAN` (PortA) and `ADMIN` (PortD) zones toward the WAN (PortB) via defined custom policies.*
+
 ## 🎓 Context
 
 This project was developed as part of a **Master's degree in Cybersecurity**, with the objective of applying theoretical security principles to a practical, lab-based infrastructure. The configuration is designed to be auditable and reproducible, serving both as a learning artefact and a portfolio demonstration of applied network security skills.
