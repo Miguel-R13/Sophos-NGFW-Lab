@@ -215,6 +215,10 @@ Los conjuntos de reglas o configuraciones ACL individuales pueden exportarse/imp
 ![Firewall Ruleset Part 1](screenshots/ngfw-vpn-admin-servers.png)
 ![Firewall Ruleset Part 2](screenshots/ngfw-lan-hyperv.png)
 
+### 🔒 Bastionado del Plano de Gestión
+![Administración y Servicios](screenshots/system-administration-hardening.png)
+*Implementación del principio de mínimo privilegio en el plano de gestión. El acceso administrativo (HTTPS/SSH) se ha restringido exclusivamente a la zona `ADMINISTRACION`, eliminando la superficie de ataque desde segmentos no autorizados.*
+
 *The firewall utilizes a top-down processing logic. The rulebase is structured to prioritize trust and management access:*
 
 * **VPN Rules:** Positioned at the top to ensure encrypted tunnels are processed with priority.
