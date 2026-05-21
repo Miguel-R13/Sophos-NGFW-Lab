@@ -1,12 +1,12 @@
-# 🔐 Arquitectura de Red Segura y Despliegue de NGFW Sophos
-
-> **Entorno de laboratorio** construido sobre Hyper-V que emula una infraestructura de red corporativa real. Diseñado para demostrar la aplicación práctica de segmentación de red, bastionado perimetral y defensa en profundidad.
-
----
+# 🔐 Despliegue de NGFW Sophos y Arquitectura de Red Segura
 
 ## 📌 Descripción del Proyecto
 
-Este proyecto documenta el diseño y despliegue de un **Firewall de Nueva Generación (NGFW)** con **Sophos XG** como perímetro de seguridad de una organización simulada llamada *Terra Renewables*. La arquitectura se fundamenta en dos principios de seguridad:
+Este proyecto documenta el diseño y despliegue de un **Firewall de Nueva Generación (NGFW)** con **Sophos XG** como perímetro de seguridad de una organización simulada.
+
+> **Entorno de laboratorio** construido sobre Hyper-V que emula una infraestructura de red corporativa real. Diseñado para demostrar la aplicación práctica de segmentación de red, bastionado perimetral y defensa en profundidad.
+
+> La arquitectura se fundamenta en dos principios de seguridad:
 
 - **Defensa en Profundidad** — múltiples capas de seguridad independientes, de modo que el fallo de un control no compromete el entorno completo.
 - **Principio de Mínimo Privilegio** — cada zona, usuario y servicio dispone únicamente del acceso estrictamente necesario para operar.
@@ -21,7 +21,7 @@ El objetivo fue construir una línea base de seguridad empresarial desde cero: d
 |---|---|
 | **Hipervisor** | Microsoft Hyper-V |
 | **NGFW** | Sophos XG Firewall (VM) |
-| **Modelo de red** | Segmentación multisona mediante interfaces lógicas |
+| **Modelo de red** | Segmentación multizona mediante interfaces lógicas |
 | **Nivel de licencia** | Licencia gratuita/Home (limitaciones indicadas donde corresponde) |
 
 La VM de Sophos XG actúa como **puerta de enlace predeterminada** para todos los segmentos, centralizando la traducción de direcciones (NAT), el enrutamiento inter-VLAN y la aplicación de políticas de seguridad en un único punto de inspección.
@@ -33,7 +33,7 @@ La VM de Sophos XG actúa como **puerta de enlace predeterminada** para todos lo
 Cada interfaz se mapea a una zona de seguridad aislada. El razonamiento detrás de cada frontera de zona se detalla a continuación.
 
 | Interfaz | Zona | Gateway de Subred | Función | Nivel de Confianza |
-|---|---|---|---|---|
+
 | PortA | LAN | `192.168.10.1` | Usuarios corporativos y dispositivos de trabajo | Medio |
 | PortC | SERVIDORES | `192.168.30.1` | Controladores de dominio y datos críticos | Alto (restringido) |
 | PortD | ADMINISTRACIÓN | `192.168.40.1` | Gestión del firewall y equipo de TI | Máximo |
@@ -42,7 +42,7 @@ Cada interfaz se mapea a una zona de seguridad aislada. El razonamiento detrás 
 
 ### Por qué importa esta segmentación
 
-La principal amenaza que mitiga esta topología es el **movimiento lateral**: si un equipo de la zona LAN es comprometido (p. ej., mediante phishing), el atacante no puede alcanzar los controladores de dominio en la zona SERVIDORES ni pivotar hacia el plano de administración, porque el firewall aplica reglas de denegación explícita entre zonas por defecto.
+La principal amenaza que mitiga esta topología es el **movimiento lateral**: si un equipo de la zona LAN es comprometido, el atacante no puede alcanzar los controladores de dominio en la zona SERVIDORES ni pivotar hacia el plano de administración, porque el firewall aplica reglas de denegación explícita entre zonas por defecto.
 
 ```
 Internet
@@ -54,8 +54,6 @@ Internet
     ├── HIPERVISORES  (virtualización)
     └── WiFi          (invitados no confiables)
 ```
-
----
 
 ## 🛡️ Ingeniería de Tráfico y Política de Firewall
 
@@ -147,7 +145,7 @@ La interfaz de gestión del propio firewall es accesible **únicamente desde la 
 ## 💡 Decisiones de Diseño y Compromisos
 
 | Decisión | Razonamiento | Compromiso (trade-off) |
-|---|---|---|
+
 | NGFW único como punto de estrangulamiento | Simplifica la gestión de políticas; todo el tráfico inter-zona es inspeccionable | Punto único de fallo (en producción: par HA) |
 | Zona ADMINISTRACIÓN en puerto dedicado | La separación física/lógica impide el acceso admin desde VLANs de usuario | Requiere NIC dedicada o switch con soporte VLAN |
 | DNS forzado a resolvers externos | Quad9/Cloudflare proporcionan filtrado por inteligencia de amenazas | Dependencia del tiempo de actividad de resolvers de terceros |
@@ -161,7 +159,7 @@ La interfaz de gestión del propio firewall es accesible **únicamente desde la 
 Esta sección documenta las funcionalidades diseñadas en la arquitectura pero no activables con licencia gratuita, junto con cómo se implementarían en un entorno de producción real.
 
 | Funcionalidad | Estado | Limitación | Implementación en Producción |
-|---|:---:|---|---|
+
 | **IPS (Intrusion Prevention System)** | ⚙️ Diseñado | Requiere suscripción **Network Protection** | Política personalizada con Drop en severidad High/Critical, Alert en Medium, aplicada sobre zonas LAN y SERVIDORES |
 | **VPN SSL — AES-256-GCM** | ⚙️ Parcial | Algunas opciones de cifrado restringidas en licencia gratuita | Suite completa AES-256-GCM con forward secrecy (PFS) habilitado |
 
