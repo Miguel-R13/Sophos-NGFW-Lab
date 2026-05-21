@@ -240,8 +240,8 @@ La copia de seguridad completa de la configuración está disponible en el direc
 ### Instrucciones de Restauración
 
 1. En el panel de administración de Sophos, ir a **Backup & firmware → Restaurar**.
-2. Hacer clic en **Examinar** y seleccionar [(/backup/MiguelSophosFW_Backup_V01001QG6KMPB4F_HV01_SFOS-22.0.0-GA-Build411_21May2026_13.13.42)]
-3. El backup está **cifrado con AES**. Para obtener la contraseña de descifrado, contactar a través de GitHub o correo electrónico.
+2. Hacer clic en **Examinar** y seleccionarlo.
+3. El backup está **cifrado con AES**. Para obtener la contraseña de descifrado, contactar conmigo a través de GitHub o a través de Linkedin [https://www.linkedin.com/in/miguel-reguero/](url)
 4. Hacer clic en **Cargar y restaurar**. El sistema aplicará la configuración y se reiniciará.
 
 ### Importación Selectiva
@@ -251,10 +251,10 @@ Los conjuntos de reglas o configuraciones ACL individuales pueden exportarse/imp
 
 ## 🎓 Contexto
 
-Este proyecto se ha desarrollado en el marco de un **Máster en Ciberseguridad**, con el objetivo de aplicar principios teóricos de seguridad a una infraestructura práctica de laboratorio. La configuración está diseñada para ser auditable y reproducible, sirviendo tanto como artefacto de aprendizaje como demostración de habilidades aplicadas de seguridad de red para un portfolio profesional.
+Este proyecto se ha desarrollado con el objetivo de aplicar principios teóricos de seguridad a una infraestructura práctica de laboratorio. La configuración está diseñada para ser auditable y reproducible, sirviendo tanto como artefacto de aprendizaje como demostración de habilidades aplicadas de seguridad de red para mi portfolio profesional.
 
 ---
 
 ## 📬 Contacto
 
-Preguntas sobre la arquitectura, la contraseña de restauración o detalles de implementación → abrir un issue o contactar a través de la información de perfil de GitHub.
+Preguntas sobre la arquitectura, la contraseña de restauración o detalles de implementación → abrir un issue o contactar a través de Linkedin [https://www.linkedin.com/in/miguel-reguero/](url)
